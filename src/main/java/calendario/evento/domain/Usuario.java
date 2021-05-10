@@ -1,35 +1,38 @@
 package calendario.evento.domain;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
- 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@SuppressWarnings("serial") 
 @Entity
 @Table(name = "Usuario")
-public class Usuario {
+public class Usuario extends AbstractEntity<Long> {
  
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+ 	@NotBlank
+	@Size(min = 3, max = 60)
     @Column(nullable = false, length = 45)
     private String username;
+
+    @NotBlank
+	@Size(min = 3, max = 60)
     @Column(nullable = false, length = 64)
     private String password;
+
+    @NotBlank
+	@Size(min = 3, max = 60)
     @Column(nullable = false, length = 45)
     private String role;
+    
     @Column(nullable = false)
     private boolean enabled;
-	
-    public Long getId() {
-		return id;
-	}
-	
-    public void setId(Long id) {
-		this.id = id;
-	}
+
+    @Column(nullable = false)
+    private List<Evento> eventos;
 	
 	public String getUsername() {
 		return username;
@@ -61,5 +64,13 @@ public class Usuario {
 	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public List<Evento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
 	}
 }

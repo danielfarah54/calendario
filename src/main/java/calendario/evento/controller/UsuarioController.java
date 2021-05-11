@@ -1,6 +1,7 @@
 package calendario.evento.controller;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import calendario.evento.domain.Usuario;
 import calendario.evento.service.spec.IUsuarioService;
@@ -20,6 +22,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService service;
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Usuario usuario) {
@@ -35,13 +40,13 @@ public class UsuarioController {
 	@PostMapping("/salvar")
 	public String salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
 		
-		if (result.hasErrors()) {
-			return "usuario/cadastro";
-		}
-		
+		// if (result.hasErrors()) {
+		// 	return "usuario/cadastro";
+		// }
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Usuario cadastrado com sucesso.");
-		return "redirect:/usuario/listar";
+		return "redirect:/usuarios/listar";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -53,10 +58,10 @@ public class UsuarioController {
 	@PostMapping("/editar")
 	public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
 		
-		if (result.hasErrors()) {
-			return "usuario/cadastro";
-		}
-
+		// if (result.hasErrors()) {
+		// 	return "usuario/cadastro";
+		// }
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Usuario editado com sucesso.");
 		return "redirect:/usuarios/listar";
@@ -64,12 +69,8 @@ public class UsuarioController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if (service.usuarioTemEventos(id)) {
-			model.addAttribute("fail", "Usuario não excluído. Possui evento(s) vinculado(s).");
-		} else {
-			service.excluir(id);
-			model.addAttribute("sucess", "Usuario excluído com sucesso.");
-		}
+		service.excluir(id);
+		model.addAttribute("sucess", "Usuario excluído com sucesso.");
 		return listar(model);
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import calendario.evento.security.UsuarioDetailsServiceImpl;
 
 @Configuration
@@ -39,13 +40,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	   	http.authorizeRequests()
-	   		.antMatchers("/", "/index", "/error").permitAll()
-	   		.antMatchers("/login/**", "/js/**", "/css/**").permitAll()
-	        .antMatchers("/image/**", "/webjars/**").permitAll()
-	   		.antMatchers("/admin/**").hasRole("ADMIN")
-	   		.antMatchers("/user/**").hasRole("USER")
-	   		.anyRequest().authenticated()
+	   	// http.authorizeRequests()
+	   	http.csrf().disable().authorizeRequests()
+				.antMatchers("/", "/index", "/error").permitAll()
+				.antMatchers("/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**").permitAll()
+				.antMatchers("/user/**").hasRole("USER")
+	   			.anyRequest().authenticated()
 	   	.and()
 	   		.formLogin()
 	   		.loginPage("/login")

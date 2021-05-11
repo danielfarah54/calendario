@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:th="http://www.thymeleaf.org"
+ 		layout:decorate="~{layout}"> 
+<head>
+	<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span th:text="#{evento.nome.label}"></span>
+					</li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/eventos/cadastrar}" role="button"> 
+					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
+					<span th:text="#{evento.message.2}"></span>
+				</a>
+			</div>
+		</nav>
+		<div class="container" id="listagem">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover table-sm">
+					<thead>
+						<tr>
+							<th><span th:text="#{evento.nome.label}"></span></th>
+							<th><span th:text="#{evento.dia.label}"></span></th>
+							<th><span th:text="#{evento.mes.label}"></span></th>
+							<th><span th:text="#{evento.ano.label}"></span></th>
+						</tr>
+					</thead>
+					<tr th:each="evento : ${eventos}">
+						<td th:text="${evento.getNome()}"></td>
+						<td th:text="${evento.getDia()}"></td>
+						<td th:text="${evento.getMes()}"></td>
+						<td th:text="${evento.getAno()}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

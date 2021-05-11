@@ -6,19 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import calendario.evento.dao.IUsuarioDAO;
+import calendario.evento.dao.IEventoDAO;
+import calendario.evento.domain.Evento;
 import calendario.evento.domain.Usuario;
-import calendario.evento.service.spec.IUsuarioService;
+import calendario.evento.service.spec.IEventoService;
 
 @Service
 @Transactional(readOnly = false)
-public class UsuarioService implements IUsuarioService {
+public class EventoService implements IEventoService {
 
 	@Autowired
-	IUsuarioDAO dao;
+	IEventoDAO dao;
 	
-	public void salvar(Usuario usuario) {
-		dao.save(usuario);
+	public void salvar(Evento evento) {
+		dao.save(evento);
 	}
 
 	public void excluir(Long id) {
@@ -26,17 +27,17 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Transactional(readOnly = true)
-	public Usuario buscarPorId(Long id) {
+	public Evento buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
 
-	@Transactional(readOnly = true) 
-	public Usuario buscarPorUsername(String username) {
-		return dao.getUserByUsername(username);
+	@Transactional(readOnly = true)
+	public List<Evento> buscarPorUsuario(Usuario usuario) {
+		return dao.findByUsuario(usuario);
 	}
 
 	@Transactional(readOnly = true)
-	public List<Usuario> buscarTodos() {
+	public List<Evento> buscarTodos() {
 		return dao.findAll();
 	}
 }

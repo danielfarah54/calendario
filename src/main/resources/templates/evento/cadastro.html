@@ -61,6 +61,24 @@
 							<span th:errors="*{ano}"></span>
 						</div>
 					</div>
+
+					<div class="form-group col-md-6">
+						<label for="inicio">Início</label> 
+						<input type="time" class="form-control" id="inicio" th:placeholder="Início" autofocus="autofocus" th:field="*{inicio}" th:classappend="${#fields.hasErrors('inicio')} ? is-invalid"/>
+						
+						<div class="invalid-feedback">
+							<span th:errors="*{inicio}"></span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="fim">Fim</label> 
+						<input type="time" class="form-control" id="fim" th:placeholder="Fim" autofocus="autofocus" th:field="*{fim}" th:classappend="${#fields.hasErrors('fim')} ? is-invalid"/>
+						
+						<div class="invalid-feedback">
+							<span th:errors="*{fim}"></span>
+						</div>
+					</div>
 				</div>
 
 				<input type="hidden" id="usuario" th:field="*{usuario}" value="${authentication.principal.name}">

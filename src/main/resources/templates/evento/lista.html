@@ -2,7 +2,7 @@
 <html 	layout:decorate="~{layout}"
 		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8"/>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
@@ -33,8 +33,8 @@
 						<tr>
 							<th><span>Nome</span></th>
 							<th><span>Data</span></th>
-							<!-- <th><span>Mês</span></th>
-							<th><span>Ano</span></th> -->
+							<th><span>Início</span></th>
+							<th><span>Fim</span></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,8 +44,8 @@
 							<td>
 								<span th:text="${evento.getDia()} + '/' + ${evento.getMes()} + '/' + ${evento.getAno()}"></span>
 							</td>
-							<!-- <td th:text="${evento.getMes()}"></td>
-							<td th:text="${evento.getAno()}"></td> -->
+							<td th:text="${evento.getInicio()}"></td>
+							<td th:text="${evento.getFim()}"></td>
 							<td colspan="2">
 								<a class="btn btn-info btn-sm" th:href="@{/eventos/editar/{id} (id=${evento.id})}" role="button">
 									<span class="oi oi-brush" title="Editar" aria-hidden="true"></span>

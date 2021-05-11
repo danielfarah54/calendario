@@ -51,7 +51,7 @@ public class UsuarioController {
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Usuario cadastrado com sucesso.");
-		return "../home";
+		return "home";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -69,13 +69,13 @@ public class UsuarioController {
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Usuario editado com sucesso.");
-		return "../home";
+		return "home";
 	}
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		service.excluir(id);
 		model.addAttribute("sucess", "Usuario excluído com sucesso.");
-		return "../";
+		return "/";
 	}
 }

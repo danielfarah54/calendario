@@ -30,6 +30,14 @@ public class Evento extends AbstractEntity<Long> {
 	@NotNull(message = "{NotNull.evento.ano}")
 	@Column(nullable = false, length = 5)
 	private Integer ano;
+
+	@NotNull(message = "{NotNull.evento.inicio}")
+	@Column(nullable = false, length = 5)
+	private String inicio;
+
+	@NotNull(message = "{NotNull.evento.fim}")
+	@Column(nullable = false, length = 5)
+	private String fim;
     
 	@NotNull(message = "{NotNull.evento.usuario}")
 	@ManyToOne
@@ -66,6 +74,22 @@ public class Evento extends AbstractEntity<Long> {
 
 	public void setAno(Integer ano) {
 		this.ano = ano;
+	}
+
+	public String getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(String inicio) {
+		this.inicio = inicio;
+	}
+
+	public String getFim() {
+		return fim;
+	}
+
+	public void setFim(String fim) {
+		this.fim = fim;
 	}
 
 	public Usuario getUsuario() {

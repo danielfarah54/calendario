@@ -1,71 +1,53 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout3}">
 <head>
 	<meta charset="UTF-8"/>
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-		<nav class="navbar navbar-expand-md bg-light">
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<i class="oi oi-caret-right"></i>
-						<span>Cadastrar</span>
-					</li>
-				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/usuarios/listar}" role="button">
-					<span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
-					<span>Listar</span>
-				</a>
-			</div>
-		</nav>
-
 		<div class="container" id="cadastro">
 			<div th:replace="fragments/alert"></div>
-			<form th:action="${usuario.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}" th:object="${usuario}" method="POST">
-				
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="username">Usuário</label>
-						<input type="text" class="form-control" id="username" th:placeholder="Usuário" autofocus="autofocus" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
-
-						<div class="invalid-feedback">
-							<span th:errors="*{username}"></span>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<h1>Novo Cadastro</h1>
+					<form th:action="${usuario.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}" th:object="${usuario}" method="POST">
+						<div th:if="${param.error}">
+							<div class="alert alert-danger">
+								<span>Oh-oh. Alguma coisa deu errado.</span>
+							</div>
 						</div>
-					</div>
+						<div class="form-group">
+							<label for="username">Usuário:</label>
+							<input type="text" class="form-control" id="username" th:placeholder="Usuário" autofocus="autofocus" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
 
-					<div class="form-group col-md-6">
-						<label for="password">Senha</label>
-						<input type="password" class="form-control" id="password" placeholder="Senha" autofocus="autofocus" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
-						                               
-						<div class="invalid-feedback">
-							<span th:errors="*{password}"></span>
+							<div class="invalid-feedback">
+								<span th:errors="*{username}"></span>
+							</div>
 						</div>
-					</div>
-
-					<div class="form-group col-md-6">
-						<input type="checkbox" name="role" id="role" th:field="*{role}" value="ROLE_USER" checked/>
-						<label for="role">
-							<a th:href="@{/usuarios/aceitarTermos}">Aceitar Termos de Uso</a>
-						</label>
-					</div>
-
-					<!-- <div class="form-group col-md-6">
-						<label th:text="#{usuario.role.label}" for="role"></label> 
-						<select id="role" class="form-control" th:field="*{role}"
-							th:classappend="${#fields.hasErrors('role')} ? is-invalid">
-							<option checked value="ROLE_USER">ROLE_USER</option>
-						</select>
-
-						<div class="invalid-feedback">
-							<span th:errors="*{role}"></span>
+						<div class="form-group">
+							<label for="password">Senha:</label>
+							<input type="password" class="form-control" id="password" placeholder="Senha" autofocus="autofocus" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
+								                               
+							<div class="invalid-feedback">
+								<span th:errors="*{password}"></span>
+							</div>
 						</div>
-					</div> -->
+
+						<div class="form-group">
+							<input type="checkbox" name="role" id="role" th:field="*{role}" value="ROLE_USER" checked/>
+							<label for="role">
+								<a th:href="@{/usuarios/aceitarTermos}">Aceitar Termos de Uso</a>
+							</label>
+						</div>
+
+						<input type="hidden" id="id" th:field="*{id}"/>
+						<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+						<a class="btn btn-primary btn-sm" type="button" href="javascript:history.back()">
+							<span>Voltar a página anterior</span>
+						</a>
+					</form>
 				</div>
-
-				<input type="hidden" id="id" th:field="*{id}"/>
-				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-			</form>
+			</div>
 		</div>
 	</section>
 </body>

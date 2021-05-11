@@ -35,8 +35,8 @@ public class UsuarioService implements IUsuarioService {
 		return dao.getUserByUsername(username);
 	}
 
-	@Transactional(readOnly = true)
-	public List<Usuario> buscarTodos() {
-		return dao.findAll();
-	}
+	// @Transactional(readOnly = true)
+	// public List<Usuario> buscarTodos() {
+	// 	return dao.findAll();
+	// }
 }

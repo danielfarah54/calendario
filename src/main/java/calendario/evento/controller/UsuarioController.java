@@ -36,11 +36,11 @@ public class UsuarioController {
 		return "usuario/termos";
 	}
 	
-	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("usuarios",service.buscarTodos());
-		return "usuario/lista";
-	}
+	// @GetMapping("/listar")
+	// public String listar(ModelMap model) {
+	// 	model.addAttribute("usuarios",service.buscarTodos());
+	// 	return "usuario/lista";
+	// }
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
@@ -51,7 +51,7 @@ public class UsuarioController {
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Usuario cadastrado com sucesso.");
-		return "redirect:/usuarios/listar";
+		return "../home";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -69,13 +69,13 @@ public class UsuarioController {
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Usuario editado com sucesso.");
-		return "redirect:/usuarios/listar";
+		return "../home";
 	}
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
 		service.excluir(id);
 		model.addAttribute("sucess", "Usuario excluído com sucesso.");
-		return listar(model);
+		return "../";
 	}
 }

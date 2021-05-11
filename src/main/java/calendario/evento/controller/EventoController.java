@@ -96,8 +96,8 @@ public class EventoController {
 		return "redirect:/eventos/listar";
 	}
 
-	@ModelAttribute("usuarios")
-	public List<Usuario> listaUsuarios() {
-		return usuarioService.buscarTodos();
-	}
+	// @ModelAttribute("usuarios")
+	// public List<Usuario> listaUsuarios() {
+	// 	return usuarioService.buscarTodos();
+	// }
 }

@@ -30,6 +30,11 @@ public class UsuarioController {
 	public String cadastrar(Usuario usuario) {
 		return "usuario/cadastro";
 	}
+
+	@GetMapping("/aceitarTermos")
+	public String aceitarTermos(Usuario usuario) {
+		return "usuario/termos";
+	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {

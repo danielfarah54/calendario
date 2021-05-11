@@ -5,7 +5,6 @@
 </head>
 <body>
 	<section class="layout-content" layout:fragment="corpo">
-
 		<nav class="navbar navbar-expand-md bg-light">
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
@@ -22,14 +21,12 @@
 		</nav>
 
 		<div class="container" id="cadastro">
-
 			<div th:replace="fragments/alert"></div>
-
 			<form th:action="${usuario.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}" th:object="${usuario}" method="POST">
 				
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="username">Nome de usuário</label>
+						<label for="username">Usuário</label>
 						<input type="text" class="form-control" id="username" th:placeholder="Usuário" autofocus="autofocus" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
 
 						<div class="invalid-feedback">
@@ -47,7 +44,10 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<input type="radio" class="form-control" id="role" name="role" autofocus="autofocus" th:field="*{role}" value="ROLE_USER" checked/>
+						<input type="checkbox" name="role" id="role" th:field="*{role}" value="ROLE_USER" checked/>
+						<label for="role">
+							<a th:href="@{/usuarios/aceitarTermos}">Aceitar Termos de Uso</a>
+						</label>
 					</div>
 
 					<!-- <div class="form-group col-md-6">

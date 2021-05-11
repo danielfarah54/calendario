@@ -16,11 +16,11 @@
 								<div class="row">
 									<div class="col-sm-9 col-sm-offset-3">
 										<b>
-											<span th:text="#{login.username}"></span>:
+											<span>Usuário</span>:
 										</b>
 										<span sec:authentication="name"></span> | 
 										<b>
-											<span th:text="#{user.role}"></span>:
+											<span>Papel</span>:
 										</b>
 										<span sec:authentication="principal.authorities"></span>
 									</div>

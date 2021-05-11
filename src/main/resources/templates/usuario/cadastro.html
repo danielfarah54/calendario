@@ -11,12 +11,12 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<i class="oi oi-caret-right"></i>
-						<span th:text="#{usuario.cadastrar.label}"></span>
+						<span>Cadastrar</span>
 					</li>
 				</ul>
 				<a class="btn btn-primary btn-md" th:href="@{/usuarios/listar}" role="button">
 					<span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
-					<span th:text="#{usuario.listar.label}">
+					<span>Listar</span>
 				</a>
 			</div>
 		</nav>
@@ -29,8 +29,8 @@
 				
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label th:text="#{usuario.username.label}" for="username"></label>
-						<input type="text" class="form-control" id="username" th:placeholder="#{usuario.username.label}" autofocus="autofocus" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
+						<label for="username">Nome de usuário</label>
+						<input type="text" class="form-control" id="username" th:placeholder="Usuário" autofocus="autofocus" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
 
 						<div class="invalid-feedback">
 							<span th:errors="*{username}"></span>
@@ -38,8 +38,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label th:text="#{usuario.password.label}" for="password"></label>
-						<input type="password" class="form-control" id="password" placeholder="#{usuario.password.label}" autofocus="autofocus" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? is-invalid" th:readonly="${usuario.id != null}"/>
+						<label for="password">Senha</label>
+						<input type="password" class="form-control" id="password" placeholder="Senha" autofocus="autofocus" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
 						                               
 						<div class="invalid-feedback">
 							<span th:errors="*{password}"></span>
@@ -47,7 +47,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<input type="text" class="form-control" id="role" autofocus="autofocus" th:field="*{role}" value="ROLE_USER" />
+						<input type="radio" class="form-control" id="role" name="role" autofocus="autofocus" th:field="*{role}" value="ROLE_USER" checked/>
 					</div>
 
 					<!-- <div class="form-group col-md-6">
@@ -64,7 +64,7 @@
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}"/>
-				<button type="submit" th:text="#{button.salvar.label}" class="btn btn-primary btn-sm"></button>
+				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 			</form>
 		</div>
 	</section>
